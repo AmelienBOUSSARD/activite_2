@@ -65,21 +65,19 @@ listeLiens.forEach(function (lien) {
 //Bouton d'affichage du formulaire
 var affichageFormBouton = document.getElementById("ajoutForm");
 
-//Element Formulaire et ses éléments enfants
+//Element Formulaire
 var formElt = document.getElementById("ajoutLien");
-var auteurElt = formElt.elements.auteur;
-var titreElt = formElt.elements.titre;
-var urlElt = formElt.elements.url;
-var validFormBouton = formElt.elements.bouton;
 
-//Elements du messages de confirmation
+//Elements du message de confirmation
 var messageAjout = document.getElementById("messageAjout");
 var messageTitre = document.getElementById("titre");
 
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
     affichageFormBouton.style.display = "none";
+    formElt.reset();
     formElt.style.display = "block";
+
 });
 
 // Animations et validation du formulaire
@@ -88,23 +86,22 @@ formElt.addEventListener('submit', function(event){
     formElt.style.display = "none";
     ajoutNouveauLien();
     event.preventDefault();
-    afficheMessage();
-    formElt.reset();
 });
 
 function ajoutNouveauLien(){
-    var lien ={
-        auteur : auteurElt.value,
-        titre : titreElt.value,
-        url : urlElt.value,
+    var url = formElt.elements.url.value;
+    var regex = /^https?:\/\/.+/i;
+    if (!regex.test(url)){
+        url = "http://" + url;
     }
-    //test sur l'url à ajouter
+    var lien ={
+        auteur : formElt.elements.auteur.value,
+        titre : formElt.elements.titre.value,
+        url : url,
+    }
     contenu.insertBefore(creerElementLien(lien),contenu.childNodes[1]);
-}
-
-
-function afficheMessage(){
-    messageTitre.textContent = titreElt.value;
+    //gestion des affichages
+    messageTitre.textContent = lien.titre;
     messageAjout.style.display = "block";
     setTimeout(function(){messageAjout.style.display = "none";}, 2000);
 }
