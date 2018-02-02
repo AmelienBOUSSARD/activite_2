@@ -21,13 +21,13 @@ button{
 }
 
 #messageAjout{
-    display : none;
+    display: none;
     color : #428bca;
     background-color: rgba(66, 189, 222, 0.3) ;
     padding : 20px;
 }
 
 form{
-    display : none;
+    display: none;
     margin-bottom: 20px;
 }

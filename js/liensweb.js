@@ -61,3 +61,23 @@ listeLiens.forEach(function (lien) {
     var elementLien = creerElementLien(lien);
     contenu.appendChild(elementLien);
 });
+
+var messageAjout = document.getElementById("messageAjout");
+
+var formElt = document.getElementById("ajoutLien");
+
+var ateurElt = formElt.elements.auteur;
+var titreElt = formElt.elements.titre;
+var urlElt = formElt.elements.url;
+var validFormBouton = formElt.elements.bouton;
+
+validFormBouton.addEventListener('click', function(){
+    affichageFormBouton.style.display = "inline-block";
+    formElt.style.display = "none";
+});
+
+var affichageFormBouton = document.getElementById("ajoutForm");
+affichageFormBouton.addEventListener('click', function(){
+    affichageFormBouton.style.display = "none";
+    formElt.style.display = "block";
+});
