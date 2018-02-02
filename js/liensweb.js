@@ -77,17 +77,30 @@ var messageTitre = document.getElementById("titre");
 
 // Animations et validation du formulaire
 validFormBouton.addEventListener('click', function(event){
+
     affichageFormBouton.style.display = "inline-block";
     formElt.style.display = "none";
-    
     event.preventDefault();
-    messageTitre.textContent = titreElt.value;
-    messageAjout.style.display = "block";
-    setTimeout(function(){messageAjout.style.display = "none";}, 2000);
+
+    afficheMessage();
+    resetChampsForm();
 });
 
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
+
     affichageFormBouton.style.display = "none";
     formElt.style.display = "block";
 });
+
+function afficheMessage(){
+    messageTitre.textContent = titreElt.value;
+    messageAjout.style.display = "block";
+    setTimeout(function(){messageAjout.style.display = "none";}, 2000);
+}
+
+function resetChampsForm(){
+    for (i=0; i<3; i++){
+        formElt.elements[i].value = "";
+    }
+}
