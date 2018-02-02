@@ -76,7 +76,7 @@ var messageAjout = document.getElementById("messageAjout");
 var messageTitre = document.getElementById("titre");
 
 // Animations et validation du formulaire
-validFormBouton.addEventListener('click', function(event){
+formElt.addEventListener('submit', function(event){
 
     affichageFormBouton.style.display = "inline-block";
     formElt.style.display = "none";
@@ -88,7 +88,6 @@ validFormBouton.addEventListener('click', function(event){
 
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
-
     affichageFormBouton.style.display = "none";
     formElt.style.display = "block";
 });
