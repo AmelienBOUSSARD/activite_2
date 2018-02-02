@@ -20,6 +20,10 @@ button{
     margin-bottom: 20px;
 }
 
+#titre{
+    font-size: inherit;
+}
+
 #messageAjout{
     display: none;
     color : #428bca;

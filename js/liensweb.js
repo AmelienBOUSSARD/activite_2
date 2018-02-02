@@ -61,22 +61,32 @@ listeLiens.forEach(function (lien) {
     var elementLien = creerElementLien(lien);
     contenu.appendChild(elementLien);
 });
+//Bouton d'affichage du formulaire
+var affichageFormBouton = document.getElementById("ajoutForm");
 
-var messageAjout = document.getElementById("messageAjout");
-
+//Element Formulaire et ses éléments enfants
 var formElt = document.getElementById("ajoutLien");
-
 var ateurElt = formElt.elements.auteur;
 var titreElt = formElt.elements.titre;
 var urlElt = formElt.elements.url;
 var validFormBouton = formElt.elements.bouton;
 
-validFormBouton.addEventListener('click', function(){
+//Elements du messages de confirmation
+var messageAjout = document.getElementById("messageAjout");
+var messageTitre = document.getElementById("titre");
+
+// Animations et validation du formulaire
+validFormBouton.addEventListener('click', function(event){
     affichageFormBouton.style.display = "inline-block";
     formElt.style.display = "none";
+    
+    event.preventDefault();
+    messageTitre.textContent = titreElt.value;
+    messageAjout.style.display = "block";
+    setTimeout(function(){messageAjout.style.display = "none";}, 2000);
 });
 
-var affichageFormBouton = document.getElementById("ajoutForm");
+//Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
     affichageFormBouton.style.display = "none";
     formElt.style.display = "block";
