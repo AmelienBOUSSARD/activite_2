@@ -75,16 +75,15 @@ var messageTitre = document.getElementById("titre");
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
     affichageFormBouton.style.display = "none";
-    formElt.reset();
     formElt.style.display = "block";
-
 });
 
 // Animations et validation du formulaire
 formElt.addEventListener('submit', function(event){
-    affichageFormBouton.style.display = "inline-block";
     formElt.style.display = "none";
+    affichageFormBouton.style.display = "inline-block";
     ajoutNouveauLien();
+    formElt.reset();
     event.preventDefault();
 });
 
