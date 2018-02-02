@@ -61,12 +61,13 @@ listeLiens.forEach(function (lien) {
     var elementLien = creerElementLien(lien);
     contenu.appendChild(elementLien);
 });
+
 //Bouton d'affichage du formulaire
 var affichageFormBouton = document.getElementById("ajoutForm");
 
 //Element Formulaire et ses éléments enfants
 var formElt = document.getElementById("ajoutLien");
-var ateurElt = formElt.elements.auteur;
+var auteurElt = formElt.elements.auteur;
 var titreElt = formElt.elements.titre;
 var urlElt = formElt.elements.url;
 var validFormBouton = formElt.elements.bouton;
@@ -75,31 +76,35 @@ var validFormBouton = formElt.elements.bouton;
 var messageAjout = document.getElementById("messageAjout");
 var messageTitre = document.getElementById("titre");
 
-// Animations et validation du formulaire
-formElt.addEventListener('submit', function(event){
-
-    affichageFormBouton.style.display = "inline-block";
-    formElt.style.display = "none";
-    event.preventDefault();
-
-    afficheMessage();
-    resetChampsForm();
-});
-
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
     affichageFormBouton.style.display = "none";
     formElt.style.display = "block";
 });
 
+// Animations et validation du formulaire
+formElt.addEventListener('submit', function(event){
+    affichageFormBouton.style.display = "inline-block";
+    formElt.style.display = "none";
+    ajoutNouveauLien();
+    event.preventDefault();
+    afficheMessage();
+    formElt.reset();
+});
+
+function ajoutNouveauLien(){
+    var lien ={
+        auteur : auteurElt.value,
+        titre : titreElt.value,
+        url : urlElt.value,
+    }
+    //test sur l'url à ajouter
+    contenu.insertBefore(creerElementLien(lien),contenu.childNodes[1]);
+}
+
+
 function afficheMessage(){
     messageTitre.textContent = titreElt.value;
     messageAjout.style.display = "block";
     setTimeout(function(){messageAjout.style.display = "none";}, 2000);
-}
-
-function resetChampsForm(){
-    for (i=0; i<3; i++){
-        formElt.elements[i].value = "";
-    }
 }
