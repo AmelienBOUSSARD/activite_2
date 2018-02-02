@@ -31,7 +31,10 @@ button{
     padding : 20px;
 }
 
+input{
+    margin : 5px
+}
+
 form{
-    display: none;
     margin-bottom: 20px;
 }

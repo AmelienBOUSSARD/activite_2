@@ -66,7 +66,7 @@ listeLiens.forEach(function (lien) {
 var affichageFormBouton = document.getElementById("ajoutForm");
 
 //Element Formulaire
-var formElt = document.getElementById("ajoutLien");
+var formElt;
 
 //Elements du message de confirmation
 var messageAjout = document.getElementById("messageAjout");
@@ -75,17 +75,51 @@ var messageTitre = document.getElementById("titre");
 //Affichage du formulaire d'ajout
 affichageFormBouton.addEventListener('click', function(){
     affichageFormBouton.style.display = "none";
-    formElt.style.display = "block";
+    formElt = creerForm();
+    document.body.insertBefore(formElt, contenu);
+    // Animations et validation du formulaire
+    formElt.addEventListener('submit', function(event){
+        formElt.style.display = "none";
+        affichageFormBouton.style.display = "inline-block";
+        ajoutNouveauLien();
+        formElt.reset();
+        event.preventDefault();
+    });
+
 });
 
-// Animations et validation du formulaire
-formElt.addEventListener('submit', function(event){
-    formElt.style.display = "none";
-    affichageFormBouton.style.display = "inline-block";
-    ajoutNouveauLien();
-    formElt.reset();
-    event.preventDefault();
-});
+function creerForm(){
+    formElt = document.createElement("form");
+    formElt.id = "ajoutLien";
+    formElt.appendChild(inputMaker({"type":"text",
+                                "name":"auteur",
+                                "placeholder": "Entrez votre nom",
+                                "required":"required"}));
+    formElt.appendChild(inputMaker({"type":"text",
+                                "name":"titre",
+                                "placeholder": "Entrez le titre du lien",
+                                "size": "30",
+                                "required":"required"}));
+    formElt.appendChild(inputMaker({"type":"text",
+                                "name":"url",
+                                "placeholder": "Entrez l'URL du lien",
+                                "size" : "30",
+                                "required":"required"}));
+    formElt.appendChild(inputMaker({"type":"submit",
+                                "name":"bouton",
+                                "value": "Ajouter"}));
+    return formElt;
+}
+
+function inputMaker(attributes){
+    var element = document.createElement("input");
+    for (var key in attributes){
+        element.setAttribute(key, attributes[key])
+    }
+    return element;
+}
+
+
 
 function ajoutNouveauLien(){
     var url = formElt.elements.url.value;
